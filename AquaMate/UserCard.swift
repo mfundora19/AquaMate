@@ -9,6 +9,8 @@ import SwiftUI
 
 struct UserCard: View {
     let name: String?
+    @Binding var finishGreetingUser: Bool
+    
     var body: some View {
         Rectangle()
             .fill(.white)
@@ -35,7 +37,7 @@ struct UserCard: View {
                         .padding(25)
                     
                     Button {
-                        
+                        finishGreetingUser.toggle()
                     } label: {
                         Text(name ?? "New User")
                             .font(.title2)
@@ -55,5 +57,5 @@ struct UserCard: View {
 }
 
 #Preview {
-    UserCard(name: "Carlos")
+    UserCard(name: "Carlos", finishGreetingUser: .constant(false))
 }

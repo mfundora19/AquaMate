@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var greetUser = true
+    
     var body: some View {
         VStack {
-            
+            if greetUser {
+                UserCard(name: nil, finishGreetingUser: $greetUser)
+            }
         }
         .padding()
     }
