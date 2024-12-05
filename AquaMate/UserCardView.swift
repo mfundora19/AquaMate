@@ -24,7 +24,7 @@ struct UserCardView: View {
                         .fill(Color(white: 0.9))
                         .overlay {
                             Circle()
-                                .stroke(Color(.cardLighter), lineWidth: 4)
+                                .stroke(Color(.base), lineWidth: 4)
                                 .shadow(radius: 4)
                             Image(systemName: name != nil ? "drop.fill" : "person.fill")
                                 .resizable()

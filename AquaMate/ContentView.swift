@@ -11,14 +11,23 @@ struct ContentView: View {
     @State var greetUser = true
     
     var body: some View {
-        VStack {
-            if greetUser {
-                UserCardView(name: nil, finishGreetingUser: $greetUser)
-            } else {
-                HomeView()
+        ZStack {
+            Color(.bg)
+                .ignoresSafeArea()
+            
+            ZStack {
+                if greetUser {
+                    UserCardView(name: nil, finishGreetingUser: $greetUser)
+                        .transition(.blurReplace)
+                } else {
+                    HomeView()
+                        .transition(.blurReplace)
+                }
             }
+            .animation(.easeInOut(duration: 0.7), value: greetUser)
+
+            .padding()
         }
-        .padding()
     }
 }
 

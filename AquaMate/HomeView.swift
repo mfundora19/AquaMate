@@ -13,21 +13,33 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
+            VStack {
+                Text("0oz")
+                    .font(.system(size: 40, weight: .semibold))
+                    .foregroundStyle(.base)
+                
+                Text("Hydration • 0% of your goal")
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
             WaterDropShape(startAnimation: $startAnimation)
+            Spacer()
+            
+            Button {
+                
+            } label: {
+                Image(systemName: "waterbottle")
+                    .font(.system(size: 50))
+                    .foregroundStyle(.base)
+                    .padding(25)
+                    .background(.white, in: Circle())
+                    
+            }
 
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 0.4, green: 0.8, blue: 1.0), // Crystal blue water
-                    Color(red: 0.7, green: 0.9, blue: 1.0)  // Lighter blue
-                ]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(.bg)
 
         
     }
