@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var progress: CGFloat = 0.5
-    @State var startAnimation: CGFloat = 0
+    @ObservedObject var viewModel = HomeViewModel()
     
     var body: some View {
         VStack {
@@ -19,10 +18,10 @@ struct HomeView: View {
                     .foregroundStyle(.base)
                 
                 Text("Hydration • 0% of your goal")
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(.gray)
             }
             Spacer()
-            WaterDropShape(startAnimation: $startAnimation)
+            WaterDropShape(startAnimation: $viewModel.startAnimation)
             Spacer()
             
             Button {
