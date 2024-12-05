@@ -13,7 +13,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if greetUser {
-                UserCard(name: nil, finishGreetingUser: $greetUser)
+                UserCardView(name: nil, finishGreetingUser: $greetUser)
+            } else {
+                HomeView()
             }
         }
         .padding()

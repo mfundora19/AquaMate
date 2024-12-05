@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserCard: View {
+struct UserCardView: View {
     let name: String?
     @Binding var finishGreetingUser: Bool
     
@@ -39,7 +39,7 @@ struct UserCard: View {
                     Button {
                         finishGreetingUser.toggle()
                     } label: {
-                        Text(name ?? "New User")
+                        Text(name ?? "GET STARTED")
                             .font(.title2)
                             .padding()
                             .fontWeight(.semibold)
@@ -57,5 +57,5 @@ struct UserCard: View {
 }
 
 #Preview {
-    UserCard(name: "Carlos", finishGreetingUser: .constant(false))
+    UserCardView(name: "Carlos", finishGreetingUser: .constant(false))
 }
