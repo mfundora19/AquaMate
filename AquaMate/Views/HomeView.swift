@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct HomeView: View {
-    @ObservedObject var viewModel = HomeViewModel()
+    @StateObject var viewModel = HomeViewModel()
     
     var body: some View {
         VStack {
             VStack {
-                Text("0oz")
-                    .font(.system(size: 40, weight: .semibold))
+                Text(viewModel.getOunces)
+                    .font(.system(size: 40, weight: .semibold, design: .rounded))
                     .foregroundStyle(.base)
                 
-                Text("Hydration • 0% of your goal")
+                Text(viewModel.getGoalPercentage)
                     .foregroundStyle(.gray)
             }
             Spacer()
@@ -43,6 +43,8 @@ struct HomeView: View {
         
     }
 }
+
+
 
 #Preview {
     HomeView()
