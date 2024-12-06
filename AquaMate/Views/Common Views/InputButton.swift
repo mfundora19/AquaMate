@@ -10,7 +10,6 @@ import SwiftUI
 struct InputButton: View {
     let text: String
     let icon: String
-    var set = false
     let action: () -> Void
     
     var body: some View {
@@ -24,7 +23,7 @@ struct InputButton: View {
             .foregroundStyle(.white)
             .padding(20)
             .frame(width: 270, height: 56)
-            .background(.base.opacity(set ? 1 : 0.5))
+            .background(.base)
             .clipShape(.rect(cornerRadius: 30))
         }
         

@@ -20,13 +20,11 @@ struct ContentView: View {
                     UserCardView(name: nil, finishGreetingUser: $greetUser)
                         .transition(.blurReplace)
                 } else {
-                    HomeView()
+                    RegisterView()
                         .transition(.blurReplace)
                 }
             }
-            .animation(.easeInOut(duration: 0.7), value: greetUser)
-
-            .padding()
+            .animation(.easeInOut(duration: 0.5), value: greetUser)
         }
     }
 }

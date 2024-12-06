@@ -5,6 +5,7 @@
 //  Created by Marcos Fundora on 12/5/24.
 //
 
+import SwiftUI
 import Foundation
 
 class RegistererViewModel: ObservableObject {
@@ -24,7 +25,9 @@ class RegistererViewModel: ObservableObject {
     
     // MARK: - Buttons Actions
     func onNameButtonPressed() {
-        showTextField = true
+        withAnimation {
+            showTextField = true
+        }
     }
 }
 

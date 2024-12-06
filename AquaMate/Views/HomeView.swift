@@ -69,7 +69,7 @@ struct WaterDropShape: View {
                     .scaleEffect(x:1.1, y:1) // Stretching in X axis
                 
                 // Wave Form Shape
-                WaterWave(progress: 0.5, waveHeight: 0.07, offset: startAnimation)
+                WaterWave(progress: 0.5, waveHeight: 0.05, offset: startAnimation)
                     .fill(.card)
                     .overlay { // Water Drops
                         Bubbles()

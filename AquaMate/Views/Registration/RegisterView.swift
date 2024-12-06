@@ -27,17 +27,7 @@ struct RegisterView: View {
                 
                 
                 VStack (spacing: 10){
-                    InputButton(text: "Name",
-                                icon: ButtonIcons.Name.rawValue,
-                                action: viewModel.onNameButtonPressed)
-                    .sheet(isPresented: $viewModel.showTextField) {
-                        TextField("Enter your name", text: $viewModel.inputName)
-                            .padding()
-                            .textFieldStyle(.roundedBorder)
-                    }
-                    
-                    InputButton(text: "Weight", icon: ButtonIcons.Weight.rawValue, action: {})
-                    InputButton(text: "Activity", icon: ButtonIcons.Fitness.rawValue, action: {})
+                    GroupOfButtons(viewModel: viewModel)
                 }.padding(.bottom, 20)
                 
                 Button {
@@ -56,3 +46,27 @@ struct RegisterView: View {
     RegisterView()
 }
 
+// MARK: - List of Buttons
+
+struct GroupOfButtons: View {
+    @ObservedObject var viewModel: RegistererViewModel
+    
+    var body: some View {
+        InputButton(text: viewModel.inputName.isEmpty ? "Name" : viewModel.inputName,
+                    icon: ButtonIcons.Name.rawValue,
+                    action: viewModel.onNameButtonPressed)
+        .sheet(isPresented: $viewModel.showTextField) {
+            RegisterNameView(name: $viewModel.inputName,
+                             nameDone: $viewModel.showTextField)
+            .presentationDetents([.fraction(1/4)])
+            .onSubmit {
+                viewModel.showTextField = false
+            }
+            
+        }
+        
+        InputButton(text: "Weight", icon: ButtonIcons.Weight.rawValue, action: {})
+        InputButton(text: "Activity", icon: ButtonIcons.Fitness.rawValue, action: {})
+        
+    }
+}
