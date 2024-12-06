@@ -16,6 +16,22 @@ struct RegisterView: View {
                 .ignoresSafeArea()
             
             VStack {
+                // Done Button
+                HStack {
+                    Spacer()
+                    Button {
+                        print("H")
+                    } label: {
+                        RegularButtonLabel(size: 12)
+                    }
+                        .padding(.trailing)
+                        .opacity(viewModel.isFormComplete ? 1 : 0)
+                        .disabled(!viewModel.isFormComplete)
+                       
+                }
+                Spacer()
+                
+                // Display the Water Goal
                 VStack {
                     Text(viewModel.getIdealWaterIntake)
                         .font(.system(size: 55, weight: .medium, design: .rounded))
@@ -25,11 +41,12 @@ struct RegisterView: View {
                         .foregroundStyle(.white)
                 }.padding(.bottom, 50)
                 
-                
+                // Group of Input Buttons
                 VStack (spacing: 10){
                     GroupOfButtons(viewModel: viewModel)
                 }.padding(.bottom, 20)
                 
+                //Custom Goal Button
                 Button {
                     viewModel.showCustomGoal = true
                 } label: {
@@ -42,6 +59,9 @@ struct RegisterView: View {
                                            customGoal: $viewModel.waterGoal)
                     .presentationDetents([.fraction(1/4)])
                 }
+                
+                
+                Spacer()
             }
         }
     }

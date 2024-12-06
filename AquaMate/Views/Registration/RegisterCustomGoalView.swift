@@ -39,7 +39,7 @@ struct RegisterCustomGoalView: View {
                             }
                         }
                         .multilineTextAlignment(.center)
-                        .frame(width: 58)
+                        .frame(width: 65)
                     Text("oz")
                 }
                 .padding(.top)

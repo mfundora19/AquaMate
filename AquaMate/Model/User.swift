@@ -12,7 +12,7 @@ struct User {
     var goalWaterIntake: Int // The goal
     var currentWaterIntake: Int
     var weight: Double // Lb
-    var minOfExercises: Int // Minutes
+    var activityMinutes: Int // Minutes
     
     // The Ideal amount a person should drink based on its situation
     var idealWaterIntake: Int {
@@ -20,7 +20,7 @@ struct User {
         let baseIntake = Int(weight * 2 / 3)
         
         // Additional water intake for exercise (12 ounces per 30 minutes of exercise)
-        let additionalIntake = (minOfExercises / 30) * 12
+        let additionalIntake = (activityMinutes / 30) * 12
         
         // Total water intake
         return Int(baseIntake + additionalIntake)

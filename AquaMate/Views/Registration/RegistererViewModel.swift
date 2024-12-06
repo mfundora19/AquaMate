@@ -15,9 +15,12 @@ class RegistererViewModel: ObservableObject {
     @Published var showCustomGoal = false
     
     @Published var inputName = ""
-    @Published var selectedWeight = 0
+    @Published var selectedWeight = 0.0
     @Published var minExercised: Double = 0
     @Published var waterGoal: Int = 64
+    
+    var user: User?
+    
     
     // Check if the all requirement inputs are set
     var isFormComplete: Bool {
@@ -25,10 +28,19 @@ class RegistererViewModel: ObservableObject {
     }
     
     
+    
     var getIdealWaterIntake: String {
         "\(waterGoal)oz"
     }
     
+    // MARK: - Creating User
+    func createUser() {
+        user = User(name: inputName,
+                    goalWaterIntake: waterGoal,
+                    currentWaterIntake: 0,
+                    weight: selectedWeight,
+                    activityMinutes: Int(minExercised))
+    }
     
     // MARK: - Buttons Actions
     func onNameButtonPressed() {
