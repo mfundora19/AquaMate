@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User {
+struct User: Codable {
     let name: String
     var goalWaterIntake: Int // The goal
     var currentWaterIntake: Int = 0
