@@ -12,19 +12,21 @@ class RegistererViewModel: ObservableObject {
     @Published var showTextField = false
     @Published var showWeightPicker = false
     @Published var showActivityRange = false
+    @Published var showCustomGoal = false
     
     @Published var inputName = ""
     @Published var selectedWeight = 0
-    @Published var minExercised: Double = 0.0
+    @Published var minExercised: Double = 0
+    @Published var waterGoal: Int = 64
     
-    var name = ""
-    var weight: Double = 0.0
-    var minOfExercises: Int = 0
-    var goalWaterIntake: Int = 0
-    var idealWaterIntake: Int = 64 // Default
+    // Check if the all requirement inputs are set
+    var isFormComplete: Bool {
+        !inputName.isEmpty && selectedWeight > 0
+    }
+    
     
     var getIdealWaterIntake: String {
-        "\(idealWaterIntake)oz"
+        "\(waterGoal)oz"
     }
     
     

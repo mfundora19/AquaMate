@@ -18,7 +18,7 @@ struct RegisterActivityView: View {
             VStack {
                 // Slider with range from 10 to 180 minutes
                 HStack {
-                    Text("10 min")
+                    Text("0 min")
                     Slider(value: $minExercised, in: 0...180, step: 1)
                         .padding()
                     Text("180 min")

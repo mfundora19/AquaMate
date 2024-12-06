@@ -31,11 +31,16 @@ struct RegisterView: View {
                 }.padding(.bottom, 20)
                 
                 Button {
-                    
+                    viewModel.showCustomGoal = true
                 } label: {
                     Text("Custom Goal")
                         .font(.system(size: 18, weight: .semibold, design: .rounded))
                         .foregroundStyle(.base)
+                }
+                .sheet(isPresented: $viewModel.showCustomGoal) {
+                    RegisterCustomGoalView(showCustomGoal: $viewModel.showCustomGoal,
+                                           customGoal: $viewModel.waterGoal)
+                    .presentationDetents([.fraction(1/4)])
                 }
             }
         }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PersonalizedTextFieldView: View {
     var placeholderText: String
+    
     @Binding var name: String
     
     let animation: Animation = .spring(response: 0.5, dampingFraction: 0.6)
