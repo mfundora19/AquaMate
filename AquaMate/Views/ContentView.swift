@@ -18,13 +18,13 @@ struct ContentView: View {
             ZStack {
                 if greetUser {
                     UserCardView(name: nil, finishGreetingUser: $greetUser)
-                        .transition(.blurReplace)
+                        .transition(.blurReplace(.downUp))
                 } else {
                     RegisterView()
-                        .transition(.blurReplace)
+                        .transition(.opacity)
                 }
             }
-            .animation(.easeInOut(duration: 0.5), value: greetUser)
+            .animation(.easeInOut(duration: 0.7), value: greetUser)
         }
     }
 }

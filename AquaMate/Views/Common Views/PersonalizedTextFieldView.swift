@@ -34,7 +34,7 @@ struct PersonalizedTextFieldView: View {
         
         ZStack (alignment: .leading) {
             Text(placeholderText)
-                .foregroundStyle($name.wrappedValue.isEmpty ? Color.black : .gray)
+                .foregroundStyle($name.wrappedValue.isEmpty ? Color(.base) : .gray)
                 .font($name.wrappedValue.isEmpty ? .headline : .caption)
                 .offset(y: placeholderOffset)
                 .scaleEffect(scaleEffectValue, anchor: .leading)

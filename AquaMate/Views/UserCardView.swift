@@ -43,7 +43,7 @@ struct UserCardView: View {
                             .font(.title2)
                             .padding()
                             .fontWeight(.semibold)
-                            .background()
+                            .background(.white)
                             .foregroundColor(.card)
                             .clipShape(.rect(cornerRadius: 20))
                             .shadow(color: .card, radius: 4, y: 2)

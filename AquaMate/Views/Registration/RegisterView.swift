@@ -65,7 +65,24 @@ struct GroupOfButtons: View {
             
         }
         
-        InputButton(text: "Weight", icon: ButtonIcons.Weight.rawValue, action: {})
+        InputButton(text: viewModel.selectedWeight == 0 ? "Weight" : "\(viewModel.selectedWeight) lb",
+                    icon: ButtonIcons.Weight.rawValue,
+                    action: viewModel.onWeightButtonPressed)
+        .sheet(isPresented: $viewModel.showWeightPicker) {
+            let numbers = Array(70...300)
+            
+            Picker("Select your Weight", selection: $viewModel.selectedWeight) {
+                ForEach(numbers, id:\.self) {number in
+                    Text("\(number)")
+                        .tag(number)
+                }
+            }
+            .pickerStyle(.wheel)
+            .presentationDetents([.fraction(1/4)])
+        }
+        
+        
+        
         InputButton(text: "Activity", icon: ButtonIcons.Fitness.rawValue, action: {})
         
     }
