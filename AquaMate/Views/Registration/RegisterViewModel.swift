@@ -8,7 +8,7 @@
 import SwiftUI
 import Foundation
 
-class RegistererViewModel: ObservableObject {
+class RegisterViewModel: ObservableObject {
     @Published var showTextField = false
     @Published var showWeightPicker = false
     @Published var showActivityRange = false
@@ -54,8 +54,8 @@ class RegistererViewModel: ObservableObject {
     }
     
     // MARK: - Creating User
-    func createUser() {
-        user = User(name: inputName,
+    func createUser() -> User {
+        return User(name: inputName,
                     goalWaterIntake: waterGoal,
                     currentWaterIntake: 0,
                     weight: selectedWeight,

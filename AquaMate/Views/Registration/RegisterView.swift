@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @StateObject var viewModel = RegistererViewModel()
+    @StateObject var viewModel = RegisterViewModel()
+    var onUserCreated: (User) -> Void
     
     var body: some View {
         ZStack {
@@ -20,7 +21,9 @@ struct RegisterView: View {
                 HStack {
                     Spacer()
                     Button {
-                        print("H")
+                        let newUser = viewModel.createUser()
+                        onUserCreated(newUser)
+                        
                     } label: {
                         RegularButtonLabel(size: 12)
                     }
@@ -68,13 +71,13 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView()
+    RegisterView( onUserCreated: {_ in })
 }
 
 // MARK: - Group of Buttons
 
 struct GroupOfButtons: View {
-    @ObservedObject var viewModel: RegistererViewModel
+    @ObservedObject var viewModel: RegisterViewModel
     
     var body: some View {
         // Name Button

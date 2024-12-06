@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var greetUser = true
+    @State var user: User? = nil
     
     var body: some View {
         ZStack {
@@ -16,11 +17,15 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             ZStack {
-                if greetUser {
-                    UserCardView(name: nil, finishGreetingUser: $greetUser)
-                        .transition(.blurReplace(.downUp))
+                if let user {
+                    if greetUser {
+                        UserCardView(name: user.name, finishGreetingUser: $greetUser)
+                            .transition(.blurReplace(.downUp))
+                    }
                 } else {
-                    RegisterView()
+                    RegisterView(onUserCreated: { newUser in
+                        user = newUser
+                    })
                         .transition(.opacity)
                 }
             }
