@@ -11,9 +11,11 @@ import Foundation
 class RegistererViewModel: ObservableObject {
     @Published var showTextField = false
     @Published var showWeightPicker = false
+    @Published var showActivityRange = false
     
     @Published var inputName = ""
     @Published var selectedWeight = 0
+    @Published var minExercised: Double = 0.0
     
     var name = ""
     var weight: Double = 0.0
@@ -35,6 +37,11 @@ class RegistererViewModel: ObservableObject {
     func onWeightButtonPressed() {
         withAnimation {
             showWeightPicker = true
+        }
+    }
+    func onActivityButtonPressed() {
+        withAnimation {
+            showActivityRange = true
         }
     }
 }

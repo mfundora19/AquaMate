@@ -46,12 +46,13 @@ struct RegisterView: View {
     RegisterView()
 }
 
-// MARK: - List of Buttons
+// MARK: - Group of Buttons
 
 struct GroupOfButtons: View {
     @ObservedObject var viewModel: RegistererViewModel
     
     var body: some View {
+        // Name Button
         InputButton(text: viewModel.inputName.isEmpty ? "Name" : viewModel.inputName,
                     icon: ButtonIcons.Name.rawValue,
                     action: viewModel.onNameButtonPressed)
@@ -63,27 +64,27 @@ struct GroupOfButtons: View {
                 viewModel.showTextField = false
             }
             
+            
         }
         
+        // Weight Button
         InputButton(text: viewModel.selectedWeight == 0 ? "Weight" : "\(viewModel.selectedWeight) lb",
                     icon: ButtonIcons.Weight.rawValue,
                     action: viewModel.onWeightButtonPressed)
         .sheet(isPresented: $viewModel.showWeightPicker) {
-            let numbers = Array(70...300)
-            
-            Picker("Select your Weight", selection: $viewModel.selectedWeight) {
-                ForEach(numbers, id:\.self) {number in
-                    Text("\(number)")
-                        .tag(number)
-                }
-            }
-            .pickerStyle(.wheel)
-            .presentationDetents([.fraction(1/4)])
+            RegisterWeightView(weight: $viewModel.selectedWeight,
+                               showWeightPicker: $viewModel.showWeightPicker)
+            .presentationDetents([.fraction(3/8)])
         }
         
-        
-        
-        InputButton(text: "Activity", icon: ButtonIcons.Fitness.rawValue, action: {})
-        
+        // Activity Button
+        InputButton(text: viewModel.minExercised == 0 ? "Activity" : "\(Int(viewModel.minExercised)) min",
+                    icon: ButtonIcons.Fitness.rawValue,
+                    action: viewModel.onActivityButtonPressed)
+            .sheet(isPresented: $viewModel.showActivityRange) {
+                RegisterActivityView(minExercised: $viewModel.minExercised,
+                                     showActivityRange: $viewModel.showActivityRange)
+                .presentationDetents([.fraction(1/4)])
+            }
     }
 }

@@ -12,10 +12,15 @@ struct RegisterNameView: View {
     @Binding var nameDone: Bool
     
     var body: some View {
-        VStack {
-            // TextField
-            PersonalizedTextFieldView(name: $name,
-                                      placeholderText: "Enter your name")
+        ZStack {
+            Color(.bg3).ignoresSafeArea()
+            
+            VStack {
+                // TextField
+                PersonalizedTextFieldView(name: $name,
+                                          placeholderText: "Enter your name")
+                .background(.white)
+            }
         }
     }
 }

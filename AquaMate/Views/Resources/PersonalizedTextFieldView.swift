@@ -42,6 +42,7 @@ struct PersonalizedTextFieldView: View {
             TextField("", text: $name)
                 .font(.headline)
                 .foregroundStyle(.base)
+                .autocorrectionDisabled()
         }
         .padding()
         .padding(.vertical, 5)
