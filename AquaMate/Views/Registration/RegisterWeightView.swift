@@ -11,7 +11,7 @@ struct RegisterWeightView: View {
     @Binding var weight: Double
     @Binding var showWeightPicker: Bool
     
-    @State private var wholeWeight: Int = 0
+    @State private var wholeWeight: Int = 70
     @State private var decimalWeight: Int = 0
     
     private let numbers = Array(70...300)

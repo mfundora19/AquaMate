@@ -31,5 +31,5 @@ struct InputButton: View {
 }
 
 #Preview {
-    InputButton(text: "Sex", icon: ButtonIcons.Name.rawValue, action: { })
+    InputButton(text: "Sex", icon: K.ButtonIcons.Name.rawValue, action: { })
 }

@@ -10,21 +10,9 @@ import Foundation
 struct User {
     let name: String
     var goalWaterIntake: Int // The goal
-    var currentWaterIntake: Int
+    var currentWaterIntake: Int = 0
     var weight: Double // Lb
-    var activityMinutes: Int // Minutes
-    
-    // The Ideal amount a person should drink based on its situation
-    var idealWaterIntake: Int {
-        // Base water intake calculation (2/3 of body weight in ounces)
-        let baseIntake = Int(weight * 2 / 3)
-        
-        // Additional water intake for exercise (12 ounces per 30 minutes of exercise)
-        let additionalIntake = (activityMinutes / 30) * 12
-        
-        // Total water intake
-        return Int(baseIntake + additionalIntake)
-    }
+    var activityMinutes: Int = 0 // Minutes
     
     // Get the % of water accomplished based on goal
     var waterIntakeProgress: Int {

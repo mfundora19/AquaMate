@@ -15,22 +15,42 @@ class RegistererViewModel: ObservableObject {
     @Published var showCustomGoal = false
     
     @Published var inputName = ""
-    @Published var selectedWeight = 0.0
-    @Published var minExercised: Double = 0
     @Published var waterGoal: Int = 64
+    @Published var selectedWeight = 0.0 {
+        didSet {
+            isWeightSet = true
+            updateWaterGoalIfNeeded()
+        }
+    }
+    @Published var minExercised: Double = 0 {
+        didSet {
+            updateWaterGoalIfNeeded()
+        }
+    }
     
+    private var isWeightSet = false
     var user: User?
-    
     
     // Check if the all requirement inputs are set
     var isFormComplete: Bool {
         !inputName.isEmpty && selectedWeight > 0
     }
     
+    // The Ideal amount a person should drink based on its situation
+    var idealWaterIntake: Int {
+        // Base water intake calculation (2/3 of body weight in ounces)
+        let baseIntake = Int(selectedWeight * 2 / 3)
+        
+        // Additional water intake for exercise (12 ounces per 30 minutes of exercise)
+        let additionalIntake = Int(minExercised / 30) * 12
+        
+        // Total water intake
+        return Int(baseIntake + additionalIntake)
+    }
     
-    
+    // Display the ideal Water Intake
     var getIdealWaterIntake: String {
-        "\(waterGoal)oz"
+        return "\(waterGoal)oz"
     }
     
     // MARK: - Creating User
@@ -41,6 +61,15 @@ class RegistererViewModel: ObservableObject {
                     weight: selectedWeight,
                     activityMinutes: Int(minExercised))
     }
+    
+    // MARK: - Update Water Goal
+    private func updateWaterGoalIfNeeded() {
+        // Update water goal only if the weight has been set
+        guard isWeightSet else { return }
+        
+        waterGoal = idealWaterIntake
+    }
+    
     
     // MARK: - Buttons Actions
     func onNameButtonPressed() {
@@ -60,8 +89,3 @@ class RegistererViewModel: ObservableObject {
     }
 }
 
-enum ButtonIcons: String {
-    case Name = "figure.wave"
-    case Weight = "scalemass"
-    case Fitness = "figure.run"
-}

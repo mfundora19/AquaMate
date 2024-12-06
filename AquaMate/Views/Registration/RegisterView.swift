@@ -79,7 +79,7 @@ struct GroupOfButtons: View {
     var body: some View {
         // Name Button
         InputButton(text: viewModel.inputName.isEmpty ? "Name" : viewModel.inputName,
-                    icon: ButtonIcons.Name.rawValue,
+                    icon: K.ButtonIcons.Name.rawValue,
                     action: viewModel.onNameButtonPressed)
         .sheet(isPresented: $viewModel.showTextField) {
             RegisterNameView(name: $viewModel.inputName,
@@ -94,7 +94,7 @@ struct GroupOfButtons: View {
         
         // Weight Button
         InputButton(text: viewModel.selectedWeight == 0 ? "Weight" : "\(viewModel.selectedWeight) lb",
-                    icon: ButtonIcons.Weight.rawValue,
+                    icon: K.ButtonIcons.Weight.rawValue,
                     action: viewModel.onWeightButtonPressed)
         .sheet(isPresented: $viewModel.showWeightPicker) {
             RegisterWeightView(weight: $viewModel.selectedWeight,
@@ -104,7 +104,7 @@ struct GroupOfButtons: View {
         
         // Activity Button
         InputButton(text: viewModel.minExercised == 0 ? "Activity" : "\(Int(viewModel.minExercised)) min",
-                    icon: ButtonIcons.Fitness.rawValue,
+                    icon: K.ButtonIcons.Fitness.rawValue,
                     action: viewModel.onActivityButtonPressed)
             .sheet(isPresented: $viewModel.showActivityRange) {
                 RegisterActivityView(minExercised: $viewModel.minExercised,
