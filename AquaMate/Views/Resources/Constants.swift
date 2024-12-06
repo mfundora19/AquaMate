@@ -12,5 +12,6 @@ enum K {
         case Name = "figure.wave"
         case Weight = "scalemass"
         case Fitness = "figure.run"
+        case Bottle = "waterbottle"
     }
 }

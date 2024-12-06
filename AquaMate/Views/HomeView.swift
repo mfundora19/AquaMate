@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    @ObservedObject var viewModel: HomeViewModel
+    
+    init(user: User) {
+        viewModel = HomeViewModel(user: user)
+    }
     
     var body: some View {
         VStack {
@@ -27,7 +31,7 @@ struct HomeView: View {
             Button {
                 
             } label: {
-                Image(systemName: "waterbottle")
+                Image(systemName: K.ButtonIcons.Bottle.rawValue)
                     .font(.system(size: 50))
                     .foregroundStyle(.base)
                     .padding(25)
@@ -47,7 +51,7 @@ struct HomeView: View {
 
 
 #Preview {
-    HomeView()
+    HomeView(user: User(name: "Ana", goalWaterIntake: 64, weight: 140))
 }
 
 // MARK: - Water Drop

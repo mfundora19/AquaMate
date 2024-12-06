@@ -8,18 +8,19 @@
 import Foundation
 
 class HomeViewModel: ObservableObject {
-    // MARK: - User
-    @Published var user: User?
-    
-    
-    // MARK: - Ounces of Water
+    @Published var user: User
     @Published var ouncesDrunk: Int = 0
     
+    init(user: User) {
+        self.user = user
+    }
+    
+    
     var getOunces: String {
-        "\(user?.currentWaterIntake ?? 0)oz"
+        "\(user.currentWaterIntake)oz"
     }
     var getGoalPercentage: String {
-        "Hydration • \(user?.waterIntakeProgress ?? 0)% of your goal"
+        "Hydration • \(user.waterIntakeProgress)% of your goal"
     }
     
     // MARK: - Water Drop
