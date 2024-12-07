@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WaterDropShape: View {
+struct WaterDropShapeView: View {
     var progress: CGFloat
     @State private var startAnimation: CGFloat = 0
     
@@ -55,7 +55,7 @@ struct WaterDropShape: View {
 
 
 #Preview {
-    WaterDropShape(progress: 0.5)
+    WaterDropShapeView(progress: 0.5)
 }
 
 // MARK: - Wave Animation Shape

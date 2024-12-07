@@ -28,25 +28,8 @@ struct HomeView: View {
                         .foregroundStyle(.gray)
                 }
                 Spacer()
-                if viewModel.user.dailyGoalCompleted {
-                    VStack {
-                        Image(.waterDropCompleted)
-                        VStack {
-                            Text("🎉 Congratulations 🎉")
-                                .font(.system(size: 25, weight: .bold, design: .rounded))
-                                
-                            Text("Daily Goal Achieved")
-                                .font(.system(size: 15, weight: .bold, design: .rounded))
-                                
-                        }.foregroundStyle(.darkLabel)
-                    }
-                    .padding()
-                    .transition(.blurReplace)
-                    
-                } else {
-                    WaterDropShape(progress: viewModel.progress)
-                        .transition(.identity)
-                }
+                HomeWaterDropView(progress: viewModel.progress,
+                                  dailyGoalCompleted: viewModel.user.dailyGoalCompleted)
                 Spacer()
                 
                 Button {
@@ -68,7 +51,7 @@ struct HomeView: View {
             
             // Display the water input
             if viewModel.showWaterInput {
-                WaterInputView(showView: $viewModel.showWaterInput,
+                HomeWaterInputView(showView: $viewModel.showWaterInput,
                                ouncesDrunk: $viewModel.ouncesDrunk)
                 .transition(.opacity)
             }

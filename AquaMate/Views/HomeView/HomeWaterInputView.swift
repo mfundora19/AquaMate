@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WaterInputView: View {
+struct HomeWaterInputView: View {
     @Binding var showView: Bool
     @Binding var ouncesDrunk: Double
     @State private var waterDrunk: Double = 0
@@ -40,5 +40,5 @@ struct WaterInputView: View {
 }
 
 #Preview {
-    WaterInputView(showView: .constant(false), ouncesDrunk: .constant(0))
+    HomeWaterInputView(showView: .constant(false), ouncesDrunk: .constant(0))
 }
