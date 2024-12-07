@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var greetUser = true
     @State private var user: User? = nil
+    @State private var appSettings: AppSettings? = nil
     @State private var navigationToHome = false
     
     var body: some View {
@@ -28,7 +29,7 @@ struct ContentView: View {
                     // Show RegisterView if no user exists
                     RegisterView(
                         navigateToHome: $navigationToHome,
-                        onUserCreated: handleUserCreation
+                        onDataCreated: handleDataCreation
                     )
                     .transition(.opacity)
                 }
@@ -43,17 +44,22 @@ struct ContentView: View {
     
     // MARK: - Helper Functions
     
+    // Load the app's data from User Defaults
     private func preparations() {
         user = UserDefaultsManager.shared.loadUser()
-        NotificationManager.shared.clearBadgeCount()
+        appSettings = UserDefaultsManager.shared.loadAppSettings()
     }
     
-    private func handleUserCreation(newUser: User) {
+    
+    private func handleDataCreation(newUser: User, newAppSettings: AppSettings) {
         user = newUser
+        appSettings = newAppSettings
         UserDefaultsManager.shared.saveUser(newUser)
+        UserDefaultsManager.shared.saveAppSettings(newAppSettings)
         navigationToHome = true
     }
     
+    // Don't go Home until we got an user
     private func handleGreetingCompletion() {
         navigationToHome = (user != nil)
     }

@@ -14,5 +14,6 @@ enum K {
         case Fitness = "figure.run"
         case Bottle = "waterbottle"
         case Plus = "plus"
+        case Settings = "gearshape.fill"
     }
 }

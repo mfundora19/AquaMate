@@ -7,16 +7,16 @@
 
 import Foundation
 
-struct AppSettings {
-    let notificationInHours: Double = 3600 * 3 // 3 hours default (in seconds)
+struct AppSettings: Codable {
+    var notificationInHours: Double = 3600 * 3 // 3 hours default (in seconds)
+    var defaultWaterGoal = 64 // oz
     
     var notificationTime: Double // Notification interval in seconds
-    var dailyWaterGoal: Double //
+    var dailyWaterGoal: Int 
     
-    init(notificationTime: Double? = nil, dailyWaterGoal: Double) {
+    init(notificationTime: Double? = nil, dailyWaterGoal: Int? = nil) {
         self.notificationTime = notificationTime ?? notificationInHours
-        self.dailyWaterGoal = dailyWaterGoal
+        self.dailyWaterGoal = dailyWaterGoal ?? defaultWaterGoal
     }
-    
     
 }

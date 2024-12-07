@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 
 class RegisterViewModel: ObservableObject {
+    // Show the RegisterInputViews
     @Published var showTextField = false
     @Published var showWeightPicker = false
     @Published var showActivityRange = false
@@ -54,11 +55,15 @@ class RegisterViewModel: ObservableObject {
     }
     
     // MARK: - Creating User
-    func createUser() -> User {
-        return User(name: inputName,
+    func createData() -> (User, AppSettings) {
+        let user = User(name: inputName,
                     goalWaterIntake: waterGoal,
                     currentWaterIntake: 0)
+        let appSetting = AppSettings(dailyWaterGoal: waterGoal)
+        
+        return (user, appSetting)
     }
+    
     
     // MARK: - Update Water Goal
     private func updateWaterGoalIfNeeded() {

@@ -58,12 +58,24 @@ struct HomeView: View {
             
             
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button{} label: {
+                    Image(systemName: K.ButtonIcons.Settings.rawValue)
+                        .font(.title)
+                        .foregroundStyle(.card)
+                        .padding()
+                }
+            }
+        }
     }
 }
 
 
 
 #Preview {
-    HomeView(user: User(name: "Ana", goalWaterIntake: 64))
+    NavigationStack {
+        HomeView(user: User(name: "Ana", goalWaterIntake: 64))
+    }
 }
 
