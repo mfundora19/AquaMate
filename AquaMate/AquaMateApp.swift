@@ -13,7 +13,7 @@ struct AquaMateApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         NotificationManager.shared.clearBadgeCount()
