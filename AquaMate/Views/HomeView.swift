@@ -16,6 +16,8 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
+            Spacer().frame(height: 50)
+            
             VStack {
                 Text(viewModel.getOunces)
                     .font(.system(size: 40, weight: .semibold, design: .rounded))
@@ -41,10 +43,7 @@ struct HomeView: View {
 
         }
         .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         .background(.bg)
-
-        
     }
 }
 
