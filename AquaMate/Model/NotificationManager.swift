@@ -14,35 +14,35 @@ class NotificationManager {
     
     private init() {}
     
+    // Request the user access to send notification
     func requestAuthorization() {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         
         UNUserNotificationCenter
             .current()
             .requestAuthorization(options: options) { (success, error) in
-                // Check for the input
-                guard success else {return}
                 if let error {
-                    print("\(error.localizedDescription)")
+                    print(error.localizedDescription)
                 }
-                
-                print(success)
-                
             }
     }
     
     // Func that will allow me to set a notification every (x) time
-    func scheduleNotification() {
+    func scheduleNotification(in time: Double, completed repeats: Bool) {
+        
+        // Remove any pending notification before adding the current
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
         // Create the editable content for notifications
         let content = UNMutableNotificationContent()
         
-        content.title = "This is my first notification!"
-        content.subtitle = "This was sooooo easy!"
+        content.title = "Thirsty !?"
+        content.subtitle = "Remember to hydrate"
         content.sound = .default
         content.badge = 1
         
-        // Triggers
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // Trigger (time)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: !repeats )
         
         
         // Schedule and request a notification
@@ -50,18 +50,15 @@ class NotificationManager {
                                             content: content,
                                             trigger: trigger)
         
-        UNUserNotificationCenter.current().add(request)
+        
+        
+        UNUserNotificationCenter.current().add(request) // Adding the current notification
+        
     }
     
     // Function to clear the badge count
     func clearBadgeCount() {
-        UNUserNotificationCenter.current().setBadgeCount(0) { error in
-            if let error = error {
-                print("Failed to clear badge count: \(error)")
-            } else {
-                print("Badge count cleared successfully.")
-            }
-        }
+        UNUserNotificationCenter.current().setBadgeCount(0)
     }
     
 }
