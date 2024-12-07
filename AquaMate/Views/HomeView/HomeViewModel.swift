@@ -24,7 +24,9 @@ class HomeViewModel: ObservableObject {
     }
     
     // MARK: - Water Drop
-    @Published var progress: CGFloat = 0.5
-    @Published var startAnimation: CGFloat = 0
+    var progress: CGFloat {
+        return CGFloat(user.waterIntakeProgress) / 100.0
+    }
+
     
 }

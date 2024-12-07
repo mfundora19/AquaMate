@@ -27,17 +27,18 @@ struct HomeView: View {
                     .foregroundStyle(.gray)
             }
             Spacer()
-            WaterDropShape(startAnimation: $viewModel.startAnimation)
+            WaterDropShape(progress: viewModel.progress)
             Spacer()
             
             Button {
-                
+                viewModel.user.currentWaterIntake += 3
             } label: {
                 Image(systemName: K.ButtonIcons.Bottle.rawValue)
-                    .font(.system(size: 50))
-                    .foregroundStyle(.base)
+                    .font(.system(size: 55))
                     .padding(25)
-                    .background(.white, in: Circle())
+                    .foregroundStyle(.base)
+                    .background(Color(.bg3), in: Circle())
+                    .shadow(radius: 1)
                     
             }
 
@@ -55,7 +56,8 @@ struct HomeView: View {
 
 // MARK: - Water Drop
 struct WaterDropShape: View {
-    @Binding var startAnimation: CGFloat
+    var progress: CGFloat
+    @State private var startAnimation: CGFloat = 0
     
     var body: some View {
         // Wave Form
@@ -72,7 +74,7 @@ struct WaterDropShape: View {
                     .scaleEffect(x:1.1, y:1) // Stretching in X axis
                 
                 // Wave Form Shape
-                WaterWave(progress: 0.5, waveHeight: 0.05, offset: startAnimation)
+                WaterWave(progress: progress, waveHeight: 0.05, offset: startAnimation)
                     .fill(.card)
                     .overlay { // Water Drops
                         Bubbles()
@@ -89,7 +91,7 @@ struct WaterDropShape: View {
             .frame(width: size.width, height: size.height, alignment: .center)
             .onAppear { // Looping Animation
                 
-                withAnimation (.linear(duration: 7).repeatForever(autoreverses: false)){
+                withAnimation (.linear(duration: 5).repeatForever(autoreverses: false)){
                     startAnimation = size.width
                 }
             }

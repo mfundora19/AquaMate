@@ -13,5 +13,6 @@ enum K {
         case Weight = "scalemass"
         case Fitness = "figure.run"
         case Bottle = "waterbottle"
+        case Plus = "plus"
     }
 }
