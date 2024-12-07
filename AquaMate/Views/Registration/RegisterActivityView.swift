@@ -33,7 +33,7 @@ struct RegisterActivityView: View {
                 Button {
                     showActivityRange = false
                 }label: {
-                    RegularButtonLabel(text: "DONE")
+                    CustomButtonLabel(text: "DONE")
                 }
             }
             .foregroundStyle(.black)

@@ -29,7 +29,7 @@ struct CustomColoredSlider: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack { // Slider
             Capsule()
                 .frame(width: width, height: height)
                 .frame(maxWidth: .infinity, maxHeight: .infinity,
@@ -51,7 +51,7 @@ struct CustomColoredSlider: View {
             Circle()
                 .frame(width: axis == .horizontal ? height : width,
                        height: axis == .vertical ? width : height)
-                .foregroundStyle(Color.white.gradient)
+                .foregroundStyle(Color.darkLabel)
                 .offset(x:axis == .horizontal ? dragging : 0,
                         y:axis == .vertical ? dragging : 0)
                 .gesture(

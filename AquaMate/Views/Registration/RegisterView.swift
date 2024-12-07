@@ -26,7 +26,7 @@ struct RegisterView: View {
                         onUserCreated(newUser)
                         navigateToHome = true
                     } label: {
-                        RegularButtonLabel(size: 12)
+                        CustomButtonLabel(size: 12)
                     }
                         .padding(.trailing)
                         .opacity(viewModel.isFormComplete ? 1 : 0)

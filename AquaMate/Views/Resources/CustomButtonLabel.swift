@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RegularButtonLabel: View {
+struct CustomButtonLabel: View {
     let text: String
     let size: Double
 
@@ -28,5 +28,5 @@ struct RegularButtonLabel: View {
 }
 
 #Preview {
-    RegularButtonLabel()
+    CustomButtonLabel()
 }

@@ -9,12 +9,18 @@ import Foundation
 
 class HomeViewModel: ObservableObject {
     @Published var user: User
-    @Published var ouncesDrunk: Int = 0
+    @Published var ouncesDrunk: Double = 0 {
+        didSet {
+            // Directly update the user's water intake and trigger objectWillChange
+            objectWillChange.send()
+            user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
+        }
+    }
+    @Published var showWaterInput = false
     
     init(user: User) {
         self.user = user
     }
-    
     
     var getOunces: String {
         "\(user.currentWaterIntake)oz"
@@ -27,6 +33,4 @@ class HomeViewModel: ObservableObject {
     var progress: CGFloat {
         return CGFloat(user.waterIntakeProgress) / 100.0
     }
-
-    
 }

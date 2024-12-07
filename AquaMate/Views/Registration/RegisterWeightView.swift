@@ -52,7 +52,7 @@ struct RegisterWeightView: View {
                 Button {
                     showWeightPicker = false
                 }label: {
-                    RegularButtonLabel(text: "DONE")
+                    CustomButtonLabel(text: "DONE")
                 }
             }
         }

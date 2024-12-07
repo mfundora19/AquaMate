@@ -51,7 +51,7 @@ struct RegisterCustomGoalView: View {
                 Button {
                     showCustomGoal = false
                 } label: {
-                    RegularButtonLabel()
+                    CustomButtonLabel()
                 }
                     .padding(.vertical, 24)
             }

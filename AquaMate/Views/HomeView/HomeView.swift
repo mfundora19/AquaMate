@@ -15,35 +15,46 @@ struct HomeView: View {
     }
     
     var body: some View {
-        VStack {
-            Spacer().frame(height: 50)
-            
+        ZStack {
             VStack {
-                Text(viewModel.getOunces)
-                    .font(.system(size: 40, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.base)
+                Spacer().frame(height: 50)
                 
-                Text(viewModel.getGoalPercentage)
-                    .foregroundStyle(.gray)
-            }
-            Spacer()
-            WaterDropShape(progress: viewModel.progress)
-            Spacer()
-            
-            Button {
-                viewModel.user.currentWaterIntake += 3
-            } label: {
-                Image(systemName: K.ButtonIcons.Bottle.rawValue)
-                    .font(.system(size: 55))
-                    .padding(25)
-                    .foregroundStyle(.base)
-                    .background(Color(.bg3), in: Circle())
-                    .shadow(radius: 1)
+                VStack {
+                    Text(viewModel.getOunces)
+                        .font(.system(size: 40, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.base)
                     
+                    Text(viewModel.getGoalPercentage)
+                        .foregroundStyle(.gray)
+                }
+                Spacer()
+                WaterDropShape(progress: viewModel.progress)
+                Spacer()
+                
+                Button {
+                    withAnimation {
+                        viewModel.showWaterInput.toggle()
+                    }
+                } label: {
+                    Image(systemName: K.ButtonIcons.Bottle.rawValue)
+                        .font(.system(size: 55))
+                        .padding(25)
+                        .foregroundStyle(.base)
+                        .background(Color(.bg3), in: Circle())
+                        .shadow(radius: 1)
+                    
+                }
+            }
+            .padding()
+            .background(.bg)
+            
+            // Display the water input
+            if viewModel.showWaterInput {
+                WaterInputView(showView: $viewModel.showWaterInput,
+                               ouncesDrunk: $viewModel.ouncesDrunk)
+                .transition(.opacity)
             }
         }
-        .padding()
-        .background(.bg)
     }
 }
 
