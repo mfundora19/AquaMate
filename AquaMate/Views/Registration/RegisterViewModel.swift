@@ -57,9 +57,7 @@ class RegisterViewModel: ObservableObject {
     func createUser() -> User {
         return User(name: inputName,
                     goalWaterIntake: waterGoal,
-                    currentWaterIntake: 0,
-                    weight: selectedWeight,
-                    activityMinutes: Int(minExercised))
+                    currentWaterIntake: 0)
     }
     
     // MARK: - Update Water Goal

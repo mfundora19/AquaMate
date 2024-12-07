@@ -10,9 +10,9 @@ import Foundation
 struct User: Codable {
     let name: String
     var goalWaterIntake: Int // The goal
+    var dailyGoalCompleted: Bool = false
     var currentWaterIntake: Int = 0
-    var weight: Double // Lb
-    var activityMinutes: Int = 0 // Minutes
+    var lastTimeLogged: Date = Date()
     
     // Get the % of water accomplished based on goal
     var waterIntakeProgress: Int {

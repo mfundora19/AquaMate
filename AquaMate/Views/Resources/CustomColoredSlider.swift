@@ -21,7 +21,9 @@ struct CustomColoredSlider: View {
     }
     
     var gradientColors: [Color] {
-        let progress = axis == .horizontal ? min(max(dragging / maxDragDistance , 0), 1) : min(max(-dragging / maxDragDistance, 0), 1)
+        let progress = axis == .horizontal ?
+        min(max(dragging / maxDragDistance , 0), 1) : min(max(-dragging / maxDragDistance, 0), 1)
+        
         let topColor = Color(red: progress, green: 1.0, blue: 1.0 - progress)
         let bottomColor = Color(red: progress, green: progress * 0.4, blue: 1.0 - progress)
         
