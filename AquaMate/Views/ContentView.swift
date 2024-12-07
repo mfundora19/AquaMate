@@ -34,7 +34,7 @@ struct ContentView: View {
                 }
             }
             .animation(.easeInOut(duration: 0.7), value: greetUser)
-            .onAppear(perform: loadUser)
+            .onAppear(perform: preparations)
             .onChange(of: greetUser) { _, _ in
                 handleGreetingCompletion()
             }
@@ -43,8 +43,9 @@ struct ContentView: View {
     
     // MARK: - Helper Functions
     
-    private func loadUser() {
+    private func preparations() {
         user = UserDefaultsManager.shared.loadUser()
+        NotificationManager.shared.clearBadgeCount()
     }
     
     private func handleUserCreation(newUser: User) {

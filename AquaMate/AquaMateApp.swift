@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct AquaMateApp: App {
+    @Environment(\.scenePhase) private var scenePhase // Tracks Lifecycle
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onChange(of: scenePhase) { _, newPhase in
+                    if newPhase == .active {
+                        NotificationManager.shared.clearBadgeCount()
+                    }
+                }
         }
     }
 }

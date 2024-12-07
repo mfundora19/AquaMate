@@ -15,22 +15,30 @@ class HomeViewModel: ObservableObject {
         didSet {
             // Directly update the user's water intake and trigger objectWillChange
             objectWillChange.send()
-            user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
-            UserDefaultsManager.shared.saveUser(user) // Save the user's progress
             
-            if userReachedGoal() {
+            user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
+            
+            
+            if userReachedGoal() { // Make the view change when goal achieved
                 withAnimation {
                     user.dailyGoalCompleted = true
                 }
             }
+            
+            
+            // NOTE: Save the user's progress
+            UserDefaultsManager.shared.saveUser(user)
         }
     }
     
     
+    
+    // Constructor
     init(user: User) {
         self.user = user
     }
     
+    // Useful getters
     var getOunces: String {
         "\(user.currentWaterIntake)oz"
     }

@@ -29,6 +29,7 @@ struct HomeWaterInputView: View {
                 Button {
                     showView = false
                     ouncesDrunk = waterDrunk
+                    NotificationManager.shared.scheduleNotification()
                 }
                 label: {
                     CustomButtonLabel()

@@ -41,6 +41,7 @@ struct UserCardView: View {
                         
                         Button {
                             finishGreetingUser.toggle()
+                            NotificationManager.shared.requestAuthorization()
                         } label: {
                             Text(name ?? "GET STARTED")
                                 .font(.title2)
@@ -61,5 +62,5 @@ struct UserCardView: View {
 }
 
 #Preview {
-    UserCardView(name: "Carlos", finishGreetingUser: .constant(false))
+    UserCardView(name: nil, finishGreetingUser: .constant(false))
 }
