@@ -55,13 +55,11 @@ class RegisterViewModel: ObservableObject {
     }
     
     // MARK: - Creating User
-    func createData() -> (User, AppSettings) {
-        let user = User(name: inputName,
+    func createUser() -> (User) {
+        return User(name: inputName,
                     goalWaterIntake: waterGoal,
                     currentWaterIntake: 0)
-        let appSetting = AppSettings(dailyWaterGoal: waterGoal)
-        
-        return (user, appSetting)
+
     }
     
     

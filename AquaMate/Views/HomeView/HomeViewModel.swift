@@ -11,6 +11,7 @@ import Foundation
 class HomeViewModel: ObservableObject {
     @Published var user: User
     @Published var showWaterInput = false
+    @Published var showSettingsView = false
     @Published var ouncesDrunk: Double = 0 {
         didSet {
             // Directly update the user's water intake and trigger objectWillChange

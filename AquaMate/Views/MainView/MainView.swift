@@ -27,7 +27,7 @@ struct MainView: View {
                     // Show RegisterView if no user exists
                     RegisterView(
                         navigateToHome: $viewModel.navigationToHome,
-                        onDataCreated: viewModel.handleDataCreation
+                        onDataCreated: viewModel.handleUserCreation
                     )
                     .transition(.opacity)
                 }

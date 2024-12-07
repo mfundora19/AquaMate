@@ -9,10 +9,28 @@ import SwiftUI
 
 struct SettingsView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack {
+            Color.bg3.ignoresSafeArea()
+            
+            VStack {
+                
+            }
+        }
+        .navigationBarBackButtonHidden()
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                Button{} label: {
+                    Image(systemName: K.ButtonIcons.BackButton.rawValue)
+                        .font(.title)
+                        .foregroundStyle(.base)
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    SettingsView()
+    NavigationStack {
+        SettingsView()
+    }
 }

@@ -15,5 +15,6 @@ enum K {
         case Bottle = "waterbottle"
         case Plus = "plus"
         case Settings = "gearshape.fill"
+        case BackButton = "chevron.backward.circle.fill"
     }
 }

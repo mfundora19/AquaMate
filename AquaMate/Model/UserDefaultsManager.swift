@@ -38,23 +38,4 @@ class UserDefaultsManager {
         return nil
     }
     
-    // MARK: - Save the APP Settings
-    func saveAppSettings(_ app: AppSettings) {
-        let encoder = JSONEncoder()
-        
-        if let encodedData = try? encoder.encode(app) {
-            UserDefaults.standard.set(encodedData, forKey: appSettingsKey)
-        }
-    }
-    
-    func loadAppSettings() -> AppSettings? {
-        if let savedData = UserDefaults.standard.data(forKey: appSettingsKey) {
-            let decoder = JSONDecoder()
-            
-            if let loadedAppSettings = try? decoder.decode(AppSettings.self, from: savedData) {
-                return loadedAppSettings
-            }
-        }
-        return nil
-    }
 }

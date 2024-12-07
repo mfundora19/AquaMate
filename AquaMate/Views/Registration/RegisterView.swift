@@ -10,7 +10,7 @@ import SwiftUI
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
     @Binding var navigateToHome: Bool
-    var onDataCreated: (User, AppSettings) -> Void
+    var onDataCreated: (User) -> Void
     
     var body: some View {
         ZStack {
@@ -22,8 +22,8 @@ struct RegisterView: View {
                 HStack {
                     Spacer()
                     Button {
-                        let (newUser, newAppSettings) = viewModel.createData()
-                        onDataCreated(newUser, newAppSettings)
+                        let newUser = viewModel.createUser()
+                        onDataCreated(newUser)
                         navigateToHome = true
                     } label: {
                         CustomButtonLabel(size: 12)
@@ -72,7 +72,7 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView( navigateToHome: .constant(false), onDataCreated: {_, _ in})
+    RegisterView( navigateToHome: .constant(false), onDataCreated: {_ in})
 }
 
 // MARK: - Group of Buttons

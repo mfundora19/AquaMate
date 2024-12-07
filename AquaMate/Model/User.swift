@@ -12,7 +12,10 @@ struct User: Codable {
     var goalWaterIntake: Int // The goal
     var dailyGoalCompleted: Bool = false
     var currentWaterIntake: Int = 0
+    
+    //Notifications
     var lastTimeLogged: Date = Date()
+    var notifyEvery: Double = 3600 * 3 // 3h by default (in seconds)
     
     // Get the % of water accomplished based on goal
     var waterIntakeProgress: Int {
