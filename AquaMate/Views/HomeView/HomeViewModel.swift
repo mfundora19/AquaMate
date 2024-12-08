@@ -18,21 +18,23 @@ class HomeViewModel: ObservableObject {
             // Directly update the user's water intake and trigger objectWillChange
             objectWillChange.send()
             
-            user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
+            user.currentWaterIntake += Int(ouncesDrunk) 
             
             // Make the view change when goal achieved
-            
             withAnimation {
                 user.dailyGoalCompleted = userReachedGoal
             }
             
-            // NOTE: Save the user's progress
-            UserDefaultsManager.shared.saveUser(user)
+           
             
             // Set notification
             if checkNotificationAllowance {
                 NotificationManager.shared.scheduleNotification(in: user.notifyEvery)
             }
+            
+            
+            // NOTE: Save the user's progress
+            UserDefaultsManager.shared.saveUser(user)
         }
     }
     

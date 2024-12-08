@@ -11,9 +11,10 @@ struct HomeWaterInputView: View {
     @Binding var showView: Bool
     @Binding var ouncesDrunk: Double
     @State private var waterDrunk: Double = 0
+    private let scale = 16.0 // Slider Scale
     
     var value: Int {
-        Int(waterDrunk * 16)
+        Int(waterDrunk * scale)
     }
     
     var body: some View {
@@ -28,7 +29,7 @@ struct HomeWaterInputView: View {
                     .foregroundStyle(Color.darkLabel)
                 Button {
                     showView = false
-                    ouncesDrunk = waterDrunk
+                    ouncesDrunk = waterDrunk * scale
                 }
                 label: {
                     CustomButtonLabel()
