@@ -13,43 +13,45 @@ struct WaterDropShapeView: View {
     
     var body: some View {
         // Wave Form
-        GeometryReader {proxy in
-            let size = proxy.size
-            
-            // Water Drop
-            ZStack {
-                Image(systemName: "drop.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .foregroundStyle(.white)
+        VStack {
+            GeometryReader {proxy in
+                let size = proxy.size
                 
-                    .scaleEffect(x:1.1, y:1) // Stretching in X axis
-                
-                
-                // Wave Form Shape
-                WaterWave(progress: progress, waveHeight: 0.05, offset: startAnimation)
-                    .fill(.card)
-                    .overlay { // Water Drops
-                        Bubbles()
+                // Water Drop
+                ZStack {
+                    Image(systemName: "drop.fill")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .foregroundStyle(.white)
+                    
+                        .scaleEffect(x:1.1, y:1) // Stretching in X axis
+                    
+                    
+                    // Wave Form Shape
+                    WaterWave(progress: progress, waveHeight: 0.05, offset: startAnimation)
+                        .fill(.card)
+                        .overlay { // Water Drops
+                            Bubbles()
+                        }
+                        .mask { // Mask Into Drop Shape
+                            Image(systemName: "drop.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .padding(20)
+                        }
+                    
+                    
+                }
+                .frame(width: size.width, height: size.height, alignment: .center)
+                .onAppear { // Looping Animation
+                    
+                    withAnimation (.linear(duration: 5).repeatForever(autoreverses: false)){
+                        startAnimation = size.width
                     }
-                    .mask { // Mask Into Drop Shape
-                        Image(systemName: "drop.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .padding(20)
-                    }
-                
-                
-            }
-            .frame(width: size.width, height: size.height, alignment: .center)
-            .onAppear { // Looping Animation
-                
-                withAnimation (.linear(duration: 5).repeatForever(autoreverses: false)){
-                    startAnimation = size.width
                 }
             }
+            .frame(height: 350)
         }
-        .frame(height: 350)
     }
 }
 

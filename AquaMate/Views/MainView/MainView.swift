@@ -1,3 +1,10 @@
+//
+//  MainView.swift
+//  AquaMate
+//
+//  Created by Marcos Fundora on 12/5/24.
+//
+
 import SwiftUI
 
 struct MainView: View {

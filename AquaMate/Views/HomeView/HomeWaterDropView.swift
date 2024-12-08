@@ -27,7 +27,6 @@ struct HomeWaterDropView: View {
                 }
                 .foregroundStyle(.darkLabel)
             }
-            .padding()
             .transition(.blurReplace)
         } else {
             WaterDropShapeView(progress: progress)
@@ -37,5 +36,5 @@ struct HomeWaterDropView: View {
 }
 
 #Preview {
-    HomeWaterDropView(progress: 0, dailyGoalCompleted: false)
+    HomeWaterDropView(progress: 0, dailyGoalCompleted: true)
 }
