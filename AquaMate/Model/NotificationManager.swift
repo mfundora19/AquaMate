@@ -30,6 +30,15 @@ class NotificationManager {
             }
     }
     
+    // Check the current notification authorization status
+    func checkAuthorizationStatus(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                completion(settings.authorizationStatus == .authorized)
+            }
+        }
+    }
+    
     // Func that will allow me to set a notification every (x) time
     func scheduleNotification(in time: Double?) {
         // Remove any pending notification before adding the current

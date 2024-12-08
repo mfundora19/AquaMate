@@ -22,6 +22,7 @@ struct User: Codable {
         }
     }
     var lastTimeLogged: Date = Date()
+    var notifyAllowed: Bool
     var notifyEvery: Double =  3 * 3600 // 3h by default (in seconds)
     
     // Get the % of water accomplished based on goal
@@ -46,5 +47,6 @@ struct User: Codable {
             lastTimeLogged = now
         }
     }
+
 
 }

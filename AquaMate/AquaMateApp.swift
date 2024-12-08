@@ -9,19 +9,33 @@ import SwiftUI
 
 @main
 struct AquaMateApp: App {
-    @Environment(\.scenePhase) private var scenePhase // Tracks Lifecycle
-    @State var user: User? = UserDefaultsManager.shared.loadUser() // Initial user load
+    @Environment(\.scenePhase) private var scenePhase
+    @State var user: User? = UserDefaultsManager.shared.loadUser()
     
     var body: some Scene {
         WindowGroup {
-            MainView(user: $user) // Pass binding to MainView
+            MainView(user: $user)
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
+                        // Check if notification authorization status has changed when the app becomes active
+                        NotificationManager.shared.checkAuthorizationStatus { auth in
+                            // Update the user object with the new notification status
+                            if var user = user {
+                                user.notifyAllowed = auth
+                                self.user = user
+                                UserDefaultsManager.shared.saveUser(user)
+                            }
+                        }
+                        
+                        // Reset the badge count when the app becomes active
                         NotificationManager.shared.clearBadgeCount()
-                        user?.resetIfNewDay() // Reset if new Day
+                        
+                        // Reset user stats if a new day has begun
+                        user?.resetIfNewDay()
                     }
                 }
         }
     }
 }
+
 

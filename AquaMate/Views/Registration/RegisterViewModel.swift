@@ -56,9 +56,15 @@ class RegisterViewModel: ObservableObject {
     
     // MARK: - Creating User
     func createUser() -> (User) {
+        var authorization: Bool = false
+        
+        NotificationManager.shared.requestAuthorization { auth in
+            authorization = auth
+        }
         return User(name: inputName,
                     goalWaterIntake: waterGoal,
-                    currentWaterIntake: 0)
+                    currentWaterIntake: 0,
+                    notifyAllowed: authorization)
 
     }
     

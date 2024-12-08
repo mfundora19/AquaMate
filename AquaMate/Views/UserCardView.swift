@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct UserCardView: View {
-    let user: User?
+    var user: User?
     @Binding var finishGreetingUser: Bool
-    @Binding var notificationAcceptance: Bool
+    @Binding var navigationToHome: Bool
     
     
     var body: some View {
@@ -42,19 +42,7 @@ struct UserCardView: View {
                             .padding(25)
                         
                         Button {
-                            if user == nil {
-                                NotificationManager.shared.requestAuthorization { auth in
-                                    Task { @MainActor in
-                                        notificationAcceptance = auth
-                                        
-                                        
-                                        finishGreetingUser = false
-                                        
-                                    }
-                                }
-                            } else {
-                                finishGreetingUser.toggle() // If the user exists, just toggle directly
-                            }
+                            finishGreetingUser.toggle()
                         } label: {
                             Text(user?.name ?? "GET STARTED")
                                 .font(.title2)
@@ -75,5 +63,7 @@ struct UserCardView: View {
 }
 
 #Preview {
-    UserCardView(user: nil, finishGreetingUser: .constant(false), notificationAcceptance: .constant(false))
+    UserCardView(user: nil,
+                 finishGreetingUser: .constant(false),
+                 navigationToHome: .constant(false))
 }

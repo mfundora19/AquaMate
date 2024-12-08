@@ -25,7 +25,7 @@ struct MainView: View {
                 if viewModel.greetUser { // Greet the User
                     UserCardView(user: viewModel.user,
                                  finishGreetingUser: $viewModel.greetUser,
-                                 notificationAcceptance: $viewModel.notificationAcceptance)
+                                 navigationToHome: $viewModel.navigationToHome)
                     .transition(.opacity)
                     
                 } else if let user = viewModel.user {

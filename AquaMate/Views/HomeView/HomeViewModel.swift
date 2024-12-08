@@ -21,7 +21,6 @@ class HomeViewModel: ObservableObject {
             UserDefaultsManager.shared.saveUser(user)
         }
     }
-    @Published var notificationAcceptance: Bool
     @Published var ouncesDrunk: Double = 0 {
         didSet {
             // Directly update the user's water intake and trigger objectWillChange
@@ -49,9 +48,8 @@ class HomeViewModel: ObservableObject {
     
     
     // Constructor
-    init(user: User, notify notificationAcceptance: Bool) {
+    init(user: User) {
         self.user = user
-        self.notificationAcceptance = notificationAcceptance
         self.dailyGoalReached = self.user.dailyGoalCompleted
     }
     

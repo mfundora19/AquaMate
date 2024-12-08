@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding var user: User
-    @Binding var notify: Bool
     @State var showCustomGoalView: Bool = false
     @State var showReminderView: Bool = false
     
@@ -20,7 +19,7 @@ struct SettingsView: View {
             
             VStack (spacing: 25){
                 NavigationLink {
-                    SettingsReminderView(notify: $notify, user: $user)
+                    SettingsReminderView(user: $user)
                 } label: {
                     CustomButtonLabel2(title: "Reminders",
                                        subtitle: nil,
@@ -77,8 +76,7 @@ struct SettingsView: View {
 
 #Preview {
     NavigationStack {
-        SettingsView(user: .constant(.init(name: "Juan", goalWaterIntake: 10)),
-                     notify: .constant(true),
+        SettingsView(user: .constant(.init(name: "Juan", goalWaterIntake: 10, notifyAllowed: true)),
                      showCustomGoalView: false)
     }
 }

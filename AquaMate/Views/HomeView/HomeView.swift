@@ -11,7 +11,7 @@ struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     
     init(user: User, notify notificationAcceptance: Bool) {
-        viewModel = HomeViewModel(user: user, notify: notificationAcceptance)
+        viewModel = HomeViewModel(user: user)
     }
     
     var body: some View {
@@ -54,7 +54,8 @@ struct HomeView: View {
             if viewModel.showWaterInput {
                 HomeWaterInputView(showView: $viewModel.showWaterInput,
                                    ouncesDrunk: $viewModel.ouncesDrunk,
-                                   notificationTime: viewModel.notificationAcceptance ? viewModel.user.notifyEvery : nil)
+                                   notificationTime: viewModel.user.notifyAllowed
+                                   ? viewModel.user.notifyEvery : nil)
                 .transition(.opacity)
             }
         }
@@ -62,7 +63,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    SettingsView(user: $viewModel.user, notify: $viewModel.notificationAcceptance)
+                    SettingsView(user: $viewModel.user)
                 } label: {
                     Image(systemName: K.ButtonIcons.Settings.rawValue)
                         .font(.title)
@@ -81,7 +82,7 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack {
-        HomeView(user: User(name: "Ana", goalWaterIntake: 64), notify: false)
+        HomeView(user: User(name: "Ana", goalWaterIntake: 64, notifyAllowed: true), notify: false)
     }
 }
 

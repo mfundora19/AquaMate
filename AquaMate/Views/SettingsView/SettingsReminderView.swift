@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsReminderView: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var notify: Bool
     @Binding var user: User
     
     var body: some View {
@@ -17,7 +16,9 @@ struct SettingsReminderView: View {
             Color.white.ignoresSafeArea()
             
             VStack {
-                CustomToggleView(title: "Reminders", isOn: $user.notificationOn)
+                CustomToggleView(title: "Reminders",
+                                 isOn: $user.notificationOn,
+                                 notify: $user.notifyAllowed)
                     .padding()
                 
                 if user.notificationOn {
@@ -61,7 +62,6 @@ struct SettingsReminderView: View {
 
 #Preview {
     NavigationStack {
-        SettingsReminderView(notify: .constant(true),
-                             user: .constant(.init(name: "John", goalWaterIntake: 0)))
+        SettingsReminderView(user: .constant(.init(name: "John", goalWaterIntake: 0, notifyAllowed: true)))
     }
 }
