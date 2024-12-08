@@ -14,12 +14,22 @@ struct User: Codable {
     var currentWaterIntake: Int = 0
     
     //Notifications
-    var notificationOn: Bool = false // Notifications on by default
+    var notificationOn: Bool = true { // Notifications on by default
+        didSet {
+            if !notificationOn { // If notifications are off clear them all
+                clearNotifications()
+            }
+        }
+    }
     var lastTimeLogged: Date = Date()
     var notifyEvery: Double =  3 * 3600 // 3h by default (in seconds)
     
     // Get the % of water accomplished based on goal
     var waterIntakeProgress: Int {
         Int((Double(currentWaterIntake) / Double(goalWaterIntake)) * 100.0)
+    }
+    
+    private func clearNotifications() {
+        NotificationManager.shared.scheduleNotification(in: nil)
     }
 }

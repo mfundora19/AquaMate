@@ -12,6 +12,7 @@ struct HomeWaterInputView: View {
     @Binding var ouncesDrunk: Double
     @State private var waterDrunk: Double = 0
     private let scale = 16.0 // Slider Scale
+    var notificationTime: Double?
     
     var value: Int {
         Int(waterDrunk * scale)
@@ -30,6 +31,9 @@ struct HomeWaterInputView: View {
                 Button {
                     showView = false
                     ouncesDrunk = waterDrunk * scale
+                    
+                    // Schedule a notification 
+                    NotificationManager.shared.scheduleNotification(in: notificationTime)
                 }
                 label: {
                     CustomButtonLabel()
@@ -41,5 +45,5 @@ struct HomeWaterInputView: View {
 }
 
 #Preview {
-    HomeWaterInputView(showView: .constant(false), ouncesDrunk: .constant(0))
+    HomeWaterInputView(showView: .constant(false), ouncesDrunk: .constant(0), notificationTime: 3600)
 }

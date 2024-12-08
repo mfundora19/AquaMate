@@ -31,10 +31,11 @@ class NotificationManager {
     }
     
     // Func that will allow me to set a notification every (x) time
-    func scheduleNotification(in time: Double) {
-        
+    func scheduleNotification(in time: Double?) {
         // Remove any pending notification before adding the current
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        
+        guard let time, time > 0 else {return}
         
         // Create the editable content for notifications
         let content = UNMutableNotificationContent()

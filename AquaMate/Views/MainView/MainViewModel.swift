@@ -25,6 +25,7 @@ class MainViewModel: ObservableObject {
     
     func handleUserCreation(newUser: User) {
         user = newUser
+        user?.notificationOn = notificationAcceptance // If user did't accept set it to off
         UserDefaultsManager.shared.saveUser(newUser)
         navigationToHome = true
     }
