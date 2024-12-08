@@ -16,5 +16,6 @@ enum K {
         case Plus = "plus"
         case Settings = "gearshape.fill"
         case BackButton = "chevron.backward.circle.fill"
+        case ForwardButton = "chevron.forward"
     }
 }

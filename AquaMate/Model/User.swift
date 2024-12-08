@@ -14,6 +14,7 @@ struct User: Codable {
     var currentWaterIntake: Int = 0
     
     //Notifications
+    var notificationOn: Bool = false // Notifications of by default
     var lastTimeLogged: Date = Date()
     var notifyEvery: Double = 3600 * 3 // 3h by default (in seconds)
     

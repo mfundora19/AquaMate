@@ -29,6 +29,8 @@ class HomeViewModel: ObservableObject {
             
             // NOTE: Save the user's progress
             UserDefaultsManager.shared.saveUser(user)
+            
+            // Set a new
         }
     }
     

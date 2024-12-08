@@ -14,11 +14,30 @@ struct SettingsView: View {
         ZStack {
             Color.bg3.ignoresSafeArea()
             
-            VStack {
-                List {
+            VStack (spacing: 25){
+                Button {
                     
+                } label: {
+                    CustomButtonLabel2(title: "Reminders",
+                                    subtitle: nil,
+                                    description: "Healthy notifications when you forget to drink water",
+                                    color: .card2,
+                                    foregroundColor: .base)
                 }
-            }
+                
+                Button {
+                    
+                } label: {
+                    CustomButtonLabel2(title: "50oz",
+                                    subtitle: "Custom goal",
+                                    description: "Change custom goal",
+                                    color: .base,
+                                    foregroundColor: .white)
+                }
+                
+                Spacer()
+                
+            }.padding()
             
             
             
