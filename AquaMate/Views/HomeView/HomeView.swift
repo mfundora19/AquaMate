@@ -61,7 +61,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    SettingsView()
+                    SettingsView(waterGoal: $viewModel.user.goalWaterIntake)
                 } label: {
                     Image(systemName: K.ButtonIcons.Settings.rawValue)
                         .font(.title)

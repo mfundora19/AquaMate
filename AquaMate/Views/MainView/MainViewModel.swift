@@ -11,6 +11,7 @@ class MainViewModel: ObservableObject {
     @Published var greetUser = true
     @Published var user: User? = nil
     @Published var navigationToHome = false
+    @Published var notificationAcceptance = false
     
     
     

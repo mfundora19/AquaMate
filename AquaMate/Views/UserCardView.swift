@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct UserCardView: View {
-    let name: String?
+    let user: User?
     @Binding var finishGreetingUser: Bool
+    @Binding var notificationAcceptance: Bool
     
     var body: some View {
         ZStack {
@@ -29,7 +30,7 @@ struct UserCardView: View {
                                 Circle()
                                     .stroke(Color(.base), lineWidth: 4)
                                     .shadow(radius: 4)
-                                Image(systemName: name != nil ? "drop.fill" : "person.fill")
+                                Image(systemName: user?.name != nil ? "drop.fill" : "person.fill")
                                     .resizable()
                                     .foregroundStyle(.blue.gradient)
                                     .scaledToFit()
@@ -41,9 +42,13 @@ struct UserCardView: View {
                         
                         Button {
                             finishGreetingUser.toggle()
-                            NotificationManager.shared.requestAuthorization()
+                            if user == nil {
+                                NotificationManager.shared.requestAuthorization { auth in
+                                    notificationAcceptance = auth
+                                }
+                            }
                         } label: {
-                            Text(name ?? "GET STARTED")
+                            Text(user?.name ?? "GET STARTED")
                                 .font(.title2)
                                 .padding()
                                 .fontWeight(.semibold)
@@ -62,5 +67,5 @@ struct UserCardView: View {
 }
 
 #Preview {
-    UserCardView(name: nil, finishGreetingUser: .constant(false))
+    UserCardView(user: nil, finishGreetingUser: .constant(false), notificationAcceptance: .constant(false))
 }

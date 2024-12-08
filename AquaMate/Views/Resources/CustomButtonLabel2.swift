@@ -19,32 +19,24 @@ struct CustomButtonLabel2: View {
             .fill(color)
             .frame(width: 370, height: 170)
             .overlay {
-                HStack {
-                    VStack (alignment: .leading) {
-                        Text(title)
+                VStack (alignment: .leading) {
+                    Text(title)
+                        .foregroundStyle(foregroundColor)
+                        .font(.system(size: 40, weight: .semibold, design: .rounded))
+                        .padding(.bottom, 6)
+                    
+                    if let subtitle {
+                        Text(subtitle)
                             .foregroundStyle(foregroundColor)
-                            .font(.system(size: 40, weight: .semibold, design: .rounded))
-                            .padding(.bottom, 6)
-                        
-                        if let subtitle {
-                            Text(subtitle)
-                                .foregroundStyle(foregroundColor)
-                                .font(.headline)
-                        }
-                        
-                        Text(description)
-                            .font(.subheadline)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Color(uiColor: .gray))
-                            .multilineTextAlignment(.leading)
-                        
+                            .font(.headline)
                     }
                     
-                    Spacer()
+                    Text(description)
+                        .font(.subheadline)
+                        .fontWeight(.medium)
+                        .foregroundStyle(Color(uiColor: .gray))
+                        .multilineTextAlignment(.leading)
                     
-                    Image(systemName: K.ButtonIcons.ForwardButton.rawValue)
-                        .font(.title)
-                        .foregroundStyle(.darkLabel)
                 }
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -54,16 +46,16 @@ struct CustomButtonLabel2: View {
 
 #Preview {
     CustomButtonLabel2(title: "50oz",
-                           subtitle: "Custom goal",
-                           description: "Change custom goal",
-                           color: .base,
-                           foregroundColor: .white)
+                       subtitle: "Custom goal",
+                       description: "Change custom goal",
+                       color: .base,
+                       foregroundColor: .white)
 }
 
 #Preview {
     CustomButtonLabel2(title: "Reminders",
-                           subtitle: nil,
-                           description: "Healthy notifications when you forget to drink water",
-                           color: .card2,
-                           foregroundColor: .base)
+                       subtitle: nil,
+                       description: "Healthy notifications when you forget to drink water",
+                       color: .card2,
+                       foregroundColor: .base)
 }

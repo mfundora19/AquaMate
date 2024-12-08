@@ -15,20 +15,23 @@ class NotificationManager {
     private init() {}
     
     // Request the user access to send notification
-    func requestAuthorization() {
+    func requestAuthorization(completion: @escaping (Bool) -> Void) {
         let options: UNAuthorizationOptions = [.alert, .sound, .badge]
         
         UNUserNotificationCenter
             .current()
-            .requestAuthorization(options: options) { (success, error) in
-                if let error {
-                    print(error.localizedDescription)
+            .requestAuthorization(options: options) { success, error in
+                if let error = error {
+                    print("Authorization failed: \(error.localizedDescription)")
+                    completion(false)
+                } else {
+                    completion(success)
                 }
             }
     }
     
     // Func that will allow me to set a notification every (x) time
-    func scheduleNotification(in time: Double, completed repeats: Bool) {
+    func scheduleNotification(in time: Double) {
         
         // Remove any pending notification before adding the current
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
@@ -42,7 +45,7 @@ class NotificationManager {
         content.badge = 1
         
         // Trigger (time)
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: !repeats )
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: time, repeats: false)
         
         
         // Schedule and request a notification

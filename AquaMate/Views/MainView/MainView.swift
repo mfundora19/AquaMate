@@ -17,8 +17,9 @@ struct MainView: View {
                     .ignoresSafeArea()
                 
                 if viewModel.greetUser { // Greet the User
-                    UserCardView(name: viewModel.user?.name,
-                                 finishGreetingUser: $viewModel.greetUser)
+                    UserCardView(user: viewModel.user,
+                                 finishGreetingUser: $viewModel.greetUser,
+                                 notificationAcceptance: $viewModel.notificationAcceptance)
                     .transition(.opacity)
                     
                 } else if let user = viewModel.user {

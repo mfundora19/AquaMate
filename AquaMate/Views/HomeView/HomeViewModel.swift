@@ -20,17 +20,20 @@ class HomeViewModel: ObservableObject {
             user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
             
             
-            if userReachedGoal() { // Make the view change when goal achieved
+            if userReachedGoal { // Make the view change when goal achieved
                 withAnimation {
                     user.dailyGoalCompleted = true
-                }
+                }   
             }
             
             
             // NOTE: Save the user's progress
             UserDefaultsManager.shared.saveUser(user)
             
-            // Set a new
+            // Set notification
+            if checkNotificationAllowance {
+                NotificationManager.shared.scheduleNotification(in: user.notifyEvery)
+            }
         }
     }
     
@@ -54,8 +57,12 @@ class HomeViewModel: ObservableObject {
         return CGFloat(user.waterIntakeProgress) / 100.0
     }
     
-    // MARK: - Helper Functions
-    func userReachedGoal() -> Bool { // Check if user accomplished his daily goal
+    // MARK: - Helper Computed Properties
+    private var userReachedGoal: Bool { // Check if user accomplished his daily goal
         user.waterIntakeProgress >= 100
+    }
+    private var checkNotificationAllowance: Bool {
+        // Check that user has its notifications on and it hasn't reached its daily goal
+        return !user.dailyGoalCompleted && user.notificationOn
     }
 }
