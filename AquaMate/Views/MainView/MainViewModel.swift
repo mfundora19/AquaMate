@@ -17,6 +17,10 @@ class MainViewModel: ObservableObject {
     
     // MARK: - Helper Functions
     
+    init(user: User?) {
+        self.user = user
+    }
+    
     // Load the app's data from User Defaults
     func preparations() {
         user = UserDefaultsManager.shared.loadUser()

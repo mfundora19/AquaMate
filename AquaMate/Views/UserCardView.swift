@@ -12,6 +12,7 @@ struct UserCardView: View {
     @Binding var finishGreetingUser: Bool
     @Binding var notificationAcceptance: Bool
     
+    
     var body: some View {
         ZStack {
             Color(.bg3)
@@ -41,16 +42,19 @@ struct UserCardView: View {
                             .padding(25)
                         
                         Button {
-                            finishGreetingUser.toggle()
                             if user == nil {
                                 NotificationManager.shared.requestAuthorization { auth in
-                                    // Ensure this is executed on the main actor
                                     Task { @MainActor in
                                         notificationAcceptance = auth
+                                        
+                                        
+                                        finishGreetingUser = false
+                                        
                                     }
                                 }
+                            } else {
+                                finishGreetingUser.toggle() // If the user exists, just toggle directly
                             }
-
                         } label: {
                             Text(user?.name ?? "GET STARTED")
                                 .font(.title2)
@@ -60,9 +64,9 @@ struct UserCardView: View {
                                 .foregroundStyle(.card)
                                 .clipShape(.rect(cornerRadius: 20))
                                 .shadow(color: .card, radius: 4, y: 2)
-                            
                         }
                         .padding(.bottom)
+
                         
                     }
                 }

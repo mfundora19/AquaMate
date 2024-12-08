@@ -10,15 +10,18 @@ import SwiftUI
 @main
 struct AquaMateApp: App {
     @Environment(\.scenePhase) private var scenePhase // Tracks Lifecycle
+    @State var user: User? = UserDefaultsManager.shared.loadUser() // Initial user load
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(user: $user) // Pass binding to MainView
                 .onChange(of: scenePhase) { _, newPhase in
                     if newPhase == .active {
                         NotificationManager.shared.clearBadgeCount()
+                        user?.resetIfNewDay() // Reset if new Day
                     }
                 }
         }
     }
 }
+

@@ -29,7 +29,22 @@ struct User: Codable {
         Int((Double(currentWaterIntake) / Double(goalWaterIntake)) * 100.0)
     }
     
+    // Remove any notifications remaining
     private func clearNotifications() {
         NotificationManager.shared.scheduleNotification(in: nil)
     }
+    
+    // Reset Stats on NewDay
+    mutating func resetIfNewDay() {
+        let calendar = Calendar.current
+        let now = Date()
+        
+        // Check if the last logged date is a different day
+        if !calendar.isDate(lastTimeLogged, inSameDayAs: now) {
+            currentWaterIntake = 0
+            dailyGoalCompleted = false
+            lastTimeLogged = now
+        }
+    }
+
 }

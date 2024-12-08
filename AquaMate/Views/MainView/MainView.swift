@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var viewModel = MainViewModel()
+    @ObservedObject var viewModel: MainViewModel
+    @Binding var user: User?
+    
+    init(user: Binding<User?>) {
+        _user = user
+        self.viewModel = MainViewModel(user: user.wrappedValue)
+    }
     
     var body: some View {
         NavigationStack {
@@ -52,5 +58,7 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    @Previewable @State var user: User? = nil
+    MainView(user: $user)
 }
+
