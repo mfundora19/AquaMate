@@ -16,7 +16,11 @@ class HomeViewModel: ObservableObject {
     }
     @Published var showWaterInput = false
     @Published var showSettingsView = false
-    @Published var dailyGoalReached = false
+    @Published var dailyGoalReached: Bool = false {
+        didSet {
+            UserDefaultsManager.shared.saveUser(user)
+        }
+    }
     @Published var notificationAcceptance: Bool
     @Published var ouncesDrunk: Double = 0 {
         didSet {
@@ -48,6 +52,7 @@ class HomeViewModel: ObservableObject {
     init(user: User, notify notificationAcceptance: Bool) {
         self.user = user
         self.notificationAcceptance = notificationAcceptance
+        self.dailyGoalReached = self.user.dailyGoalCompleted
     }
     
     // Useful getters
@@ -73,6 +78,8 @@ class HomeViewModel: ObservableObject {
     }
     // Check if user set new Goal and update UI
     private func checkDailyGoalAchieved() {
-        dailyGoalReached = Int(user.currentWaterIntake) >= user.goalWaterIntake
+        withAnimation {
+            dailyGoalReached = Int(user.currentWaterIntake) >= user.goalWaterIntake
+        }
     }
 }

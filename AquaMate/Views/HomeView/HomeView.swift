@@ -31,6 +31,9 @@ struct HomeView: View {
                 Spacer()
                 HomeWaterDropView(progress: viewModel.progress,
                                   dailyGoalCompleted: viewModel.dailyGoalReached)
+                .onAppear {
+                    print(viewModel.dailyGoalReached)
+                }
                 Spacer()
                 
                 Button {
@@ -61,7 +64,7 @@ struct HomeView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 NavigationLink {
-                    SettingsView(user: $viewModel.user)
+                    SettingsView(waterGoal: $viewModel.user.goalWaterIntake)
                 } label: {
                     Image(systemName: K.ButtonIcons.Settings.rawValue)
                         .font(.title)

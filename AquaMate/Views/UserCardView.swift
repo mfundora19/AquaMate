@@ -44,9 +44,13 @@ struct UserCardView: View {
                             finishGreetingUser.toggle()
                             if user == nil {
                                 NotificationManager.shared.requestAuthorization { auth in
-                                    notificationAcceptance = auth
+                                    // Ensure this is executed on the main actor
+                                    Task { @MainActor in
+                                        notificationAcceptance = auth
+                                    }
                                 }
                             }
+
                         } label: {
                             Text(user?.name ?? "GET STARTED")
                                 .font(.title2)
