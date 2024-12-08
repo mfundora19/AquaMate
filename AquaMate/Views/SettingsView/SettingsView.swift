@@ -28,7 +28,9 @@ struct SettingsView: View {
                 }
                 
                 Button {
-                    
+                    withAnimation {
+                        showCustomGoalView.toggle()
+                    }
                 } label: {
                     CustomButtonLabel2(title: "\(waterGoal) oz",
                                     subtitle: "Custom goal",

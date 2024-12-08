@@ -10,8 +10,8 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel: HomeViewModel
     
-    init(user: User) {
-        viewModel = HomeViewModel(user: user)
+    init(user: User, notify notificationAcceptance: Bool) {
+        viewModel = HomeViewModel(user: user, notify: notificationAcceptance)
     }
     
     var body: some View {
@@ -80,7 +80,7 @@ struct HomeView: View {
 
 #Preview {
     NavigationStack {
-        HomeView(user: User(name: "Ana", goalWaterIntake: 64))
+        HomeView(user: User(name: "Ana", goalWaterIntake: 64), notify: false)
     }
 }
 

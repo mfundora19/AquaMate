@@ -12,6 +12,7 @@ class HomeViewModel: ObservableObject {
     @Published var user: User
     @Published var showWaterInput = false
     @Published var showSettingsView = false
+    @Published var notificationAcceptance: Bool
     @Published var ouncesDrunk: Double = 0 {
         didSet {
             // Directly update the user's water intake and trigger objectWillChange
@@ -19,13 +20,11 @@ class HomeViewModel: ObservableObject {
             
             user.currentWaterIntake += Int(ouncesDrunk * 16) // Multiply by 16 to convert to oz
             
+            // Make the view change when goal achieved
             
-            if userReachedGoal { // Make the view change when goal achieved
-                withAnimation {
-                    user.dailyGoalCompleted = true
-                }   
+            withAnimation {
+                user.dailyGoalCompleted = userReachedGoal
             }
-            
             
             // NOTE: Save the user's progress
             UserDefaultsManager.shared.saveUser(user)
@@ -40,8 +39,9 @@ class HomeViewModel: ObservableObject {
     
     
     // Constructor
-    init(user: User) {
+    init(user: User, notify notificationAcceptance: Bool) {
         self.user = user
+        self.notificationAcceptance = notificationAcceptance
     }
     
     // Useful getters

@@ -24,9 +24,9 @@ struct MainView: View {
                     
                 } else if let user = viewModel.user {
                     // If the User already Exist go directly to the HomeView
-                    NavigationLink("", destination: HomeView(user: user))
+                    NavigationLink("", destination: HomeView(user: user, notify: viewModel.notificationAcceptance))
                         .navigationDestination(isPresented: $viewModel.navigationToHome) {
-                            HomeView(user: user)
+                            HomeView(user: user, notify: viewModel.notificationAcceptance)
                                 .navigationBarBackButtonHidden()
                                 .ignoresSafeArea()
                         }
