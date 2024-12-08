@@ -50,6 +50,7 @@ class HomeViewModel: ObservableObject {
     // Constructor
     init(user: User) {
         self.user = user
+        checkAndResetDailyGoal()
         self.dailyGoalReached = self.user.dailyGoalCompleted
     }
     
@@ -79,5 +80,24 @@ class HomeViewModel: ObservableObject {
         withAnimation {
             dailyGoalReached = Int(user.currentWaterIntake) >= user.goalWaterIntake
         }
+    }
+    
+    func checkAndResetDailyGoal() {
+        guard let lastResetDate = user.lastResetDate else {
+            // First time app is running, set current date
+            user.lastResetDate = Date()
+            return
+        }
+        
+        let calendar = Calendar.current
+        if !calendar.isDateInToday(lastResetDate) {
+            // Reset the water intake for a new day
+            user.currentWaterIntake = 0
+            user.dailyGoalCompleted = false
+            user.lastResetDate = Date()
+            
+            UserDefaultsManager.shared.saveUser(user)
+        }
+        
     }
 }

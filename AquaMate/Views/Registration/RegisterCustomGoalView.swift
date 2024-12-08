@@ -18,7 +18,7 @@ struct RegisterCustomGoalView: View {
             
             VStack {
                 HStack {
-                    TextField("Enter your goal", text: $strGoal)
+                    TextField("###", text: $strGoal)
                         .keyboardType(.numberPad)
                         .onAppear {
                             strGoal = "\(customGoal)" // Display the customGoal 

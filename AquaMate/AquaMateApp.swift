@@ -21,17 +21,16 @@ struct AquaMateApp: App {
                         NotificationManager.shared.checkAuthorizationStatus { auth in
                             // Update the user object with the new notification status
                             if var user = user {
+                                let homeViewModel = HomeViewModel(user: user)
+                                homeViewModel.checkAndResetDailyGoal()
+                                user = homeViewModel.user
                                 user.notifyAllowed = auth
-                                self.user = user
                                 UserDefaultsManager.shared.saveUser(user)
                             }
                         }
                         
                         // Reset the badge count when the app becomes active
                         NotificationManager.shared.clearBadgeCount()
-                        
-                        // Reset user stats if a new day has begun
-                        user?.resetIfNewDay()
                     }
                 }
         }

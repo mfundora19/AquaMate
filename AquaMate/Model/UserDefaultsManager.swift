@@ -12,7 +12,6 @@ class UserDefaultsManager {
     static let shared = UserDefaultsManager()
     
     private let userKey = "user_key"
-    private let appSettingsKey = "app_settings_key"
     
     // MARK: - Save the USER
     // Private initializer to prevent instantiation from outside
