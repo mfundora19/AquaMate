@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
-    @Binding var waterGoal: Int
+    @Binding var user: User
     @State var showCustomGoalView: Bool = false
     
     var body: some View {
@@ -30,9 +30,10 @@ struct SettingsView: View {
                 Button {
                     withAnimation {
                         showCustomGoalView.toggle()
+                        
                     }
                 } label: {
-                    CustomButtonLabel2(title: "\(waterGoal) oz",
+                    CustomButtonLabel2(title: "\(user.currentWaterIntake) oz",
                                     subtitle: "Custom goal",
                                     description: "Change custom goal",
                                     color: .base,
@@ -40,7 +41,7 @@ struct SettingsView: View {
                 }
                 .sheet(isPresented: $showCustomGoalView) {
                     RegisterCustomGoalView(showCustomGoal: $showCustomGoalView,
-                                           customGoal: $waterGoal)
+                                           customGoal: $user.goalWaterIntake)
                     .presentationDetents([.fraction(1/4)])
                 }
                 
@@ -68,6 +69,7 @@ struct SettingsView: View {
 
 #Preview {
     NavigationStack {
-        SettingsView(waterGoal: .constant(0), showCustomGoalView: false)
+        SettingsView(user: .constant(User(name: "Juan", goalWaterIntake: 0)),
+                     showCustomGoalView: false)
     }
 }

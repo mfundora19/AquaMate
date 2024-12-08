@@ -9,9 +9,14 @@ import SwiftUI
 import Foundation
 
 class HomeViewModel: ObservableObject {
-    @Published var user: User
+    @Published var user: User {
+        didSet {
+            checkDailyGoalAchieved()
+        }
+    }
     @Published var showWaterInput = false
     @Published var showSettingsView = false
+    @Published var dailyGoalReached = false
     @Published var notificationAcceptance: Bool
     @Published var ouncesDrunk: Double = 0 {
         didSet {
@@ -24,8 +29,7 @@ class HomeViewModel: ObservableObject {
             withAnimation {
                 user.dailyGoalCompleted = userReachedGoal
             }
-            
-           
+        
             
             // Set notification
             if checkNotificationAllowance {
@@ -66,5 +70,9 @@ class HomeViewModel: ObservableObject {
     private var checkNotificationAllowance: Bool {
         // Check that user has its notifications on and it hasn't reached its daily goal
         return !user.dailyGoalCompleted && user.notificationOn
+    }
+    // Check if user set new Goal and update UI
+    private func checkDailyGoalAchieved() {
+        dailyGoalReached = Int(user.currentWaterIntake) >= user.goalWaterIntake
     }
 }
