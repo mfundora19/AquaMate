@@ -24,6 +24,7 @@ struct HomeWaterDropView: View {
                         .font(.system(size: 25, weight: .bold, design: .rounded))
                     Text("Daily Goal Achieved")
                         .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .padding(.bottom, 20)
                 }
                 .foregroundStyle(.darkLabel)
             }

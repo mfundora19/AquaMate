@@ -46,7 +46,8 @@ struct HomeView: View {
                         .shadow(radius: 1)
                 }
             }
-            .padding(.top, 50)  // apply padding here
+            .padding(.top, 80)
+            .padding(.bottom, 70)
             .background(.bg)
             
             // Display the water input
