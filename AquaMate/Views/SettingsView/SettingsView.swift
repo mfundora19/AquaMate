@@ -15,7 +15,9 @@ struct SettingsView: View {
             Color.bg3.ignoresSafeArea()
             
             VStack {
-                
+                List {
+                    
+                }
             }
             
             
